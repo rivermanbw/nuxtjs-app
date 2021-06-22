@@ -54,9 +54,5 @@ export default {
       title: this.title,
     }
   },
-  // async fetch() {
-  //   const response = await this.$axios.get('http://localhost:4730/books')
-  //   this.books = response.data
-  // },
 }
 </script>

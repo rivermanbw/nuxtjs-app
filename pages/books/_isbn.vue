@@ -47,13 +47,24 @@ export default {
   //   }
   // },
   async fetch() {
+    let loadingToast
+    if (process.client) {
+      loadingToast = this.$toast.show('Getting book details...')
+    }
+
     const response = await this.$axios.get(
       'http://localhost:4730/books/' + this.isbn
     )
-    // await new Promise((r) => {
-    //   setTimeout()
+
+    // await new Promise((resolve, reject) => {
+    //   setTimeout(resolve(), 1500)
     // })
     this.book = response.data
+
+    if (process.client) {
+      loadingToast.goAway(0)
+      this.$toast.success('Book was successfully loaded', { duration: 3000 })
+    }
   },
 }
 </script>
