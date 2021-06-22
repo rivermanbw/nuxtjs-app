@@ -146,7 +146,9 @@
   </div>
 </template>
 <script>
-export default {}
+export default {
+  layout: 'clean',
+}
 </script>
 
 <style>
