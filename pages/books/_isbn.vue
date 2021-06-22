@@ -1,9 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="text-2xl font-bold text-gray-900 mb-4">
-      Book details - {{ isbn }}
-    </h1>
-    <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+    <div v-if="book" class="bg-white shadow overflow-hidden sm:rounded-lg">
       <div class="px-4 py-5 sm:px-6">
         <h3 class="text-lg leading-6 font-medium text-gray-900">
           {{ book.title }}
@@ -33,24 +30,30 @@ export default {
   data() {
     return {
       isbn: this.$route.params.isbn,
-      book: {
-        title: 'Become awesome with NuxtJS',
-        author: 'John Doe',
-      },
+      book: {},
     }
   },
   // Head() tauscht Meta Tags im html head aus!
-  head() {
-    return {
-      title: this.isbn + ' - ' + this.book.title,
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: this.book.author + '-' + this.book.title,
-        },
-      ],
-    }
+  // head() {
+  //   return {
+  //     // title: this.isbn + ' - ' + this.books.title,
+  //     // meta: [
+  //     //   {
+  //     //     hid: 'description',
+  //     //     name: 'description',
+  //     //     // content: this.books.author + '-' + this.books.title,
+  //     //   },
+  //     // ],
+  //   }
+  // },
+  async fetch() {
+    const response = await this.$axios.get(
+      'http://localhost:4730/books/' + this.isbn
+    )
+    // await new Promise((r) => {
+    //   setTimeout()
+    // })
+    this.book = response.data
   },
 }
 </script>

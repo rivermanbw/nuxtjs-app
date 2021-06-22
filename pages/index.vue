@@ -26,7 +26,11 @@
 </template>
 
 <script>
-export default {}
+export default {
+  nuxtServerInit() {
+    // vuex wird geladen
+  },
+}
 </script>
 
 <style>
