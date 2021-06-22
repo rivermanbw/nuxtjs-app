@@ -48,6 +48,7 @@ export default {
   // },
   async fetch() {
     let loadingToast
+    // Code wird nur im Browser ausgeführt - alternative process.server wird auf nodejs-server von nuxtjs ausgeführt
     if (process.client) {
       loadingToast = this.$toast.show('Getting book details...')
     }
@@ -55,10 +56,10 @@ export default {
     const response = await this.$axios.get(
       'http://localhost:4730/books/' + this.isbn
     )
-
-    // await new Promise((resolve, reject) => {
-    //   setTimeout(resolve(), 1500)
-    // })
+    await new Promise((resolve, reject) => {
+      // eslint-disable-next-line
+      setTimeout(resolve(), 1500)
+    })
     this.book = response.data
 
     if (process.client) {
