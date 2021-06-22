@@ -39,5 +39,17 @@ export default {
       },
     }
   },
+  head() {
+    return {
+      title: this.isbn + ' - ' + this.book.title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.book.author + '-' + this.book.title,
+        },
+      ],
+    }
+  },
 }
 </script>
