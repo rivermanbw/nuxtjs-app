@@ -147,7 +147,7 @@
 </template>
 <script>
 export default {
-  layout: 'clean',
+  layout: 'clean', // Dateiname von  ./layout/clean.vue
 }
 </script>
 
