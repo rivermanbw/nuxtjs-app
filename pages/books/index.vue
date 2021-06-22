@@ -10,6 +10,7 @@ export default {
       title: 'Books',
     }
   },
+  // Head tauscht Meta Tags im html head aus!
   head() {
     return {
       title: this.title,

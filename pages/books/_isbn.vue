@@ -39,6 +39,7 @@ export default {
       },
     }
   },
+  // Head() tauscht Meta Tags im html head aus!
   head() {
     return {
       title: this.isbn + ' - ' + this.book.title,
