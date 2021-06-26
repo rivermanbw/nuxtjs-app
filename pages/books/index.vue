@@ -35,24 +35,31 @@
     </div>
   </div>
 </template>
+
 <script>
 export default {
+  meta: {
+    requiredRole: 'User',
+  },
   async asyncData(context) {
     const response = await context.$axios.get('http://localhost:4730/books')
     return {
       books: response.data,
     }
   },
-  data() {
-    return {
-      title: 'Books',
-    }
-  },
-  // Head tauscht Meta Tags im html head aus!
-  head() {
-    return {
-      title: this.title,
-    }
+  head: {
+    title: 'Books list',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'All of our best books ever!',
+      },
+      // {
+      //   name: 'description',
+      //   content: 'Another description from page without hid',
+      // },
+    ],
   },
 }
 </script>

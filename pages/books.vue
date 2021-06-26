@@ -1,6 +1,19 @@
 <template>
-  <!-- <div class="container"> -->
-  <!-- <h1 class="text-2xl font-bold text-gray-900 mb-4">Book Startseite</h1> -->
-  <nuxt-child />
-  <!-- </div> -->
+  <div>
+    <div class="p-8 text-xl text-center bg-blue-100">
+      This is a books.vue file and a parent view for /books path!
+    </div>
+    <NuxtChild />
+  </div>
 </template>
+
+<script>
+export default {
+  head: {
+    titleTemplate: '%s | Parent component title template',
+  },
+  meta: {
+    requiredRole: 'User_FromParentRoute',
+  },
+}
+</script>

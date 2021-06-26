@@ -1,6 +1,23 @@
 <template>
-  <div class="container">
-    <div v-if="book" class="bg-white shadow overflow-hidden sm:rounded-lg">
+  <div>
+    <h1 class="text-2xl font-bold text-gray-900 mb-4">
+      Book details - {{ isbn }}
+    </h1>
+    <div
+      v-if="$fetchState.pending"
+      class="text-xl text-gray-600 text-center p-4"
+    >
+      Loading...
+    </div>
+
+    <div
+      v-else-if="!$fetchState.pending && $fetchState.error"
+      class="p-8 bg-red-200"
+    >
+      {{ $fetchState.error.message }}
+    </div>
+
+    <div v-else class="bg-white shadow overflow-hidden sm:rounded-lg">
       <div class="px-4 py-5 sm:px-6">
         <h3 class="text-lg leading-6 font-medium text-gray-900">
           {{ book.title }}
@@ -33,38 +50,34 @@ export default {
       book: {},
     }
   },
-  // Head() tauscht Meta Tags im html head aus!
-  // head() {
-  //   return {
-  //     // title: this.isbn + ' - ' + this.books.title,
-  //     // meta: [
-  //     //   {
-  //     //     hid: 'description',
-  //     //     name: 'description',
-  //     //     // content: this.books.author + '-' + this.books.title,
-  //     //   },
-  //     // ],
-  //   }
-  // },
   async fetch() {
     let loadingToast
-    // Code wird nur im Browser ausgeführt - alternative process.server wird auf nodejs-server von nuxtjs ausgeführt
     if (process.client) {
       loadingToast = this.$toast.show('Getting book details...')
     }
 
-    const response = await this.$axios.get(
+    const response = await this.$axios.$get(
       'http://localhost:4730/books/' + this.isbn
     )
-    await new Promise((resolve, reject) => {
-      // eslint-disable-next-line
-      setTimeout(resolve(), 1500)
-    })
-    this.book = response.data
+    // eslint-disable-next-line
+    // await new Promise((r) => {setTimeout(() => r(), 3000)})
+    this.book = response
 
     if (process.client) {
       loadingToast.goAway(0)
       this.$toast.success('Book was successfully loaded', { duration: 3000 })
+    }
+  },
+  head() {
+    return {
+      title: 'Book ' + this.isbn,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Details of book with isbn ' + this.isbn,
+        },
+      ],
     }
   },
 }

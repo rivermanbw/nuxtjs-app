@@ -1,4 +1,8 @@
-# nuxtjs-app
+# nuxtjs-app2
+
+Backend ist die bookmonkey-api
+`npm i -g bookmonkey-api`
+`bookmonkey-api`
 
 ## Build Setup
 

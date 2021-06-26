@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="bg-indigo-600">
-      <nav class="max-w-7xl mx-auto px-4" aria-label="Top">
+      <nav class="container mx-auto px-4" aria-label="Top">
         <div
           class="
             w-full
@@ -65,3 +65,19 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  middleware: ['auth'],
+  head: {
+    title: 'Title from layout',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Description from layout',
+      },
+    ],
+  },
+}
+</script>
